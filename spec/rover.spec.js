@@ -43,7 +43,7 @@ describe("Rover class", function() {
 
     it("responds with the position for the move command", function(){
       let commands = [new Command('Move', 10000), new Command('STATUS_CHECK')];
-      let message = new Message('Test message with two commands', commands);
+      let message = new Message('Test if moved position', commands);
       let rover = new Rover(98382); 
       let currentMessage = rover.receiveMessage(message);
       expect(currentMessage.position).toBe(108382);
