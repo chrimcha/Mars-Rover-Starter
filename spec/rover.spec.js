@@ -14,9 +14,14 @@ describe("Rover class", function() {
       expect(Rover.generatorWatts = 110).toBe(110);
     });
 
-    // it("response returned by receiveMessage contains the name of the message", function() {
-    //   expect(Rover.receiveMessage(message)).toContain(Rover.Message.name);
-    // });
+    it("response returned by receiveMessage contains the name of the message", function() {
+      let commands = [new Command('Move', 10000), new Command('STATUS_CHECK')];
+      let message = new Message('Test if moved position', commands);
+      let rover = new Rover(98382); 
+      let currentMessage = rover.receiveMessage(message);
+
+      expect(currentMessage.message).toContain(Message.name);
+    });
 
     // it("response returned by receiveMessage includes two results if two commands are sent in the message", function() {
     //   expect(Rover.receiveMessage(message)).toIncludes(Rover.results.length);
