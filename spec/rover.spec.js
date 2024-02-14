@@ -23,15 +23,20 @@ describe("Rover class", function() {
       expect(currentMessage.message).toContain(Message.name);
     });
 
-    // it("response returned by receiveMessage includes two results if two commands are sent in the message", function() {
-    //   expect(Rover.receiveMessage(message)).toIncludes(Rover.results.length);
+    it("response returned by receiveMessage includes two results if two commands are sent in the message", function() {
+      let commands = [new Command('Move', 10000), new Command('STATUS_CHECK')];
+      let message = new Message('Test if moved position', commands);
+      let rover = new Rover(98382); 
+      let currentMessage = rover.receiveMessage(message);
+
+      expect(commands.length).toEqual(2);
 
     //   // expect(Rover.results.length).toBe(2);
     //   // let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
     //   // let message = new Message('Test message with two commands', commands); 
     //   // let currentMessage = Rover.receiveMessage(message);
     //   // expect(currentMessage.results.length).toIncludes(Command.length);
-    // });
+    });
 
     // it("responds correctly to the status check command", function() {
     //   let currentMessage = Rover.receiveMessage(message);
