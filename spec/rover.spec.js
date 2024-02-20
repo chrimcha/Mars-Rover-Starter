@@ -86,7 +86,7 @@ describe("Rover class", function() {
       let message = new Message('TA power', commands);
       let response = rover.receiveMessage(message);
 
-      expect(rover.position).toBe(4421);
+      expect(rover.position).toBe(4321);
     });
 
 });

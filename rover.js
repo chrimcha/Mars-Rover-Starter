@@ -26,15 +26,17 @@ class Rover {
          }
       
       let j = 0;
-      while (resultsArray.length < commandArray.length) {
-      
-         for (let i = 0; i < commandArray.length; i++) {
-            if (commandArray[i].commandType === 'MOVE') {
-               roverCommandTypes.STATUS_CHECK.roverStatus.position =  this.position += commandArray[i].value;
-               let m = roverCommandTypes.MOVE;
-               resultsArray.push(m);
+      while (resultsArray.length < commandArray.length) {      
+         for (let i = 0; i < commandArray.length; i++) {           
+            if (commandArray[i].commandType === 'MOVE' && this.mode === 'LOW_POWER') {
+               let mL = {completed: false}
+               resultsArray.push(mL);
+            } else if (commandArray[i].commandType === 'MOVE' && this.mode === 'NORMAL') {
+               roverCommandTypes.STATUS_CHECK.roverStatus.position =  this.position = commandArray[i].value;
+               let mN = roverCommandTypes.MOVE;
+               resultsArray.push(mN);
             }
-
+            
             if (commandArray[i].commandType === 'STATUS_CHECK') {
                let s = roverCommandTypes.STATUS_CHECK;
                resultsArray.push(s);
@@ -45,11 +47,7 @@ class Rover {
                this.mode = 'LOW_POWER';
                roverCommandTypes.STATUS_CHECK.roverStatus.mode = 'LOW_POWER';
                resultsArray.push(c);
-            }
-
-            if (this.mode === 'LOW_POWER') {
-               roverCommandTypes.MOVE.completed = false;
-            }
+            }            
          }
          
          j++;
